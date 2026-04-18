@@ -10,7 +10,8 @@ CREATE TABLE auctions(
     highest_bidder_id BIGINT,
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
-    active BOOLEAN NOT NULL
+    active BOOLEAN NOT NULL,
+    version BIGINT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE bids(

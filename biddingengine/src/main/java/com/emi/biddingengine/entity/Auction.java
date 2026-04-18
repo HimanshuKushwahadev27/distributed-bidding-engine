@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,7 +30,7 @@ public class Auction {
     @Column(name = "starting_price", nullable = false)
     private Double startingPrice;
 
-    @Column(name = "current_highest_bid")
+    @Column(name = "current_hīighest_bid")
     private Double currentHighestBid;
 
     @Column(name = "highest_bidder_id")
@@ -43,4 +44,8 @@ public class Auction {
 
     @Column(name = "active", nullable = false)
     private boolean active;
+
+    @Version
+    @Column(name = "version", nullable = false, columnDefinition = "bigint default 0")
+    private Long version;
 }

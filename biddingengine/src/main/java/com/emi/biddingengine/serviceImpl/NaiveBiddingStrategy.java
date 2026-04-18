@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Service
+@Service("naiveBiddingStrategy")
 @RequiredArgsConstructor
 public class NaiveBiddingStrategy implements BidService {
 
@@ -49,10 +49,10 @@ public class NaiveBiddingStrategy implements BidService {
       bid1.setTimestamp(Instant.now());
       bidRepository.save(bid1);
 
-      return new BidResults("SUCCESS", request.amount(), request.userId());
+      return new BidResults("SUCCESS", request.amount(), request.userId(),0 , false);
     } 
 
-    return new BidResults("FAILED", request.amount(), request.userId());
+    return new BidResults("FAILED", request.amount(), request.userId(), 0 , true);
 
   }
 
