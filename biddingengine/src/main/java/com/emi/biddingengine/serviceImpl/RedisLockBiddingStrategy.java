@@ -37,25 +37,25 @@ public class RedisLockBiddingStrategy implements BidService {
       String lockValue = UUID.randomUUID().toString(); //unique value to identify lock owner
 
       int maxRetries = 3;
-      long backOffTime = 200;
-      
-      for(int i = 0 ; i < maxRetries ; i++){
+      long backOffTime = 300;
+       int i = 0;
+      for( i = 0 ; i < maxRetries ; i++){
         boolean lockAcquired = false;
         try{
             lockAcquired = acquireLock(lockKey, lockValue);
 
             if(lockAcquired){
-              return placeBidWithRedisLock(request);
+              return placeBidWithRedisLock(request, i+1);
             }
 
             log.info("Attempt {}/{} - Lock busy for auction {}, backing off {}ms",
                 i, maxRetries, request.auctionId(), backOffTime);
 
             Thread.sleep(backOffTime);
-            backOffTime = Math.min(backOffTime * 2, 500);
+            backOffTime = Math.min(backOffTime * 2, 2000);
         }catch (InterruptedException e) {
           Thread.currentThread().interrupt();
-          return new BidResults("INTERRUPTED", request.amount(), request.userId(), 0, true);
+          return new BidResults("INTERRUPTED", request.amount(), request.userId(), i+1, true);
         } finally {
           if(lockAcquired){
             releaseLock(lockKey, lockValue);
@@ -63,7 +63,7 @@ public class RedisLockBiddingStrategy implements BidService {
         }
       }
 
-      return new BidResults("LOCK_BUSY", request.amount(), request.userId(), 0, true);
+      return new BidResults("LOCK_BUSY", request.amount(), request.userId(), i+1, true);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class RedisLockBiddingStrategy implements BidService {
     private boolean acquireLock(String lockKey, String lockValue) {
      try{
         Boolean locked = redisTemplate.opsForValue()
-            .setIfAbsent(lockKey, lockValue, Duration.ofSeconds(5));
+            .setIfAbsent(lockKey, lockValue, Duration.ofSeconds(15));
         return locked != null && locked;
         
      } catch (Exception e) {
@@ -105,20 +105,20 @@ public class RedisLockBiddingStrategy implements BidService {
       }
     }
 
-    private BidResults placeBidWithRedisLock(BidRequest request) {
+    private BidResults placeBidWithRedisLock(BidRequest request, int attempt) {
       //fetch auction details
       var auctionOpt = auctionRepository.findById(request.auctionId());
       if(auctionOpt.isEmpty()){
-        return new BidResults("AUCTION_NOT_FOUND", request.amount(), request.userId(), 0, true);
+        return new BidResults("AUCTION_NOT_FOUND", request.amount(), request.userId(), attempt, true);
       }
 
       var auction = auctionOpt.get();
       if(!auction.isActive()){
-        return new BidResults("AUCTION_CLOSED", request.amount(), request.userId(), 0, true);
+        return new BidResults("AUCTION_CLOSED", request.amount(), request.userId(), attempt, true);
       }
 
       if(request.amount() <= (auction.getCurrentHighestBid() != null ? auction.getCurrentHighestBid() : auction.getStartingPrice())){
-        return new BidResults("BID_TOO_LOW", request.amount(), request.userId(), 0, true);
+        return new BidResults("BID_TOO_LOW", request.amount(), request.userId(), attempt, true);
       }
 
       //place bid
@@ -136,7 +136,7 @@ public class RedisLockBiddingStrategy implements BidService {
       auctionRepository.save(auction);
       
 
-      return new BidResults("SUCCESS", request.amount(), request.userId(),0, false);
+      return new BidResults("SUCCESS", request.amount(), request.userId(), attempt, false);
     }
 
 
