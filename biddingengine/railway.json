@@ -1,6 +1,6 @@
 {
   "build": {
-    "builder": "dockerfile",
+    "builder": "Dockerfile",
     "context": "biddingengine"
   },
   "deploy": {
