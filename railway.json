@@ -1,9 +1,10 @@
 {
   "build": {
     "builder": "dockerfile",
-    "dockerfilePath": "biddingengine/Dockerfile"
+    "dockerfilePath": "biddingengine/Dockerfile",
+    "context": "biddingengine"
   },
   "deploy": {
-    "startCommand": "java -jar biddingengine/target/*.jar"
+    "startCommand": "java -jar app.jar"
   }
 }
