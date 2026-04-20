@@ -37,7 +37,7 @@ public class RedisLockBiddingStrategy implements BidService {
       String lockValue = UUID.randomUUID().toString(); //unique value to identify lock owner
 
       int maxRetries = 3;
-      long backOffTime = 50;
+      long backOffTime = 200;
       
       for(int i = 0 ; i < maxRetries ; i++){
         boolean lockAcquired = false;
