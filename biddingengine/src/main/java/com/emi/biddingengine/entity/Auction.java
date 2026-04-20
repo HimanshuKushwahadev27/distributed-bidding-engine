@@ -30,7 +30,7 @@ public class Auction {
     @Column(name = "starting_price", nullable = false)
     private Double startingPrice;
 
-    @Column(name = "current_hīighest_bid")
+    @Column(name = "current_highest_bid")
     private Double currentHighestBid;
 
     @Column(name = "highest_bidder_id")

@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+    postgres:
+        image: postgres:15
+        container_name: postgres
+        restart: always
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: biddingengine_db
+        ports:
+            - "5433:5432"
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        networks:
+            - Auction-net
+        healthcheck:
+            test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+            interval: 5s
+            timeout: 5s
+            retries: 5
+
+    redis:
+      image: redis:7
+      container_name: redis-server
+      ports:
+        - "6379:6379"
+      restart: always
+      networks:
+        - Auction-net 
+
+    bidding-engine:
+      build:
+          context: ..
+          dockerfile: biddingengine/Dockerfile
+      container_name: bidding-engine
+      restart: on-failure
+      environment:
+          SPRING_DATA_REDIS_HOST: redis-server
+          SPRING_DATA_REDIS_PORT: 6379
+          SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/biddingengine_db
+          SPRING_DATASOURCE_USERNAME: postgres
+          SPRING_DATASOURCE_PASSWORD: postgres
+      ports:
+          - "8081:8080"
+      depends_on:
+          postgres:
+              condition: service_healthy
+      networks:
+          - Auction-net
+
+volumes:
+  postgres_data:     
+
+networks:
+    Auction-net:
+        driver: bridge
