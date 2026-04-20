@@ -12,10 +12,4 @@ public class BiddingengineApplication {
 		SpringApplication.run(BiddingengineApplication.class, args);
 	}
 
-		@Bean
-    public CommandLineRunner printEnv() {
-        return args -> {
-            System.out.println("NEON_DATABASE_URL = " + System.getenv("NEON_DATABASE_URL"));
-        };
-    }
 }
