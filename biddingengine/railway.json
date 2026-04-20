@@ -1,0 +1,9 @@
+{
+  "build": {
+    "builder": "dockerfile",
+    "context": "biddingengine"
+  },
+  "deploy": {
+    "startCommand": "java -jar target/*.jar"
+  }
+}
