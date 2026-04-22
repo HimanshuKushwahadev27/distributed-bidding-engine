@@ -1,0 +1,77 @@
+<mat-card class="panel-card panel-card--highlight">
+  <mat-card-header>
+    <mat-card-title>Selected auction</mat-card-title>
+    <mat-card-subtitle>
+      @if (selectedAuction) {
+        #{{ selectedAuction.id }} · product {{ selectedAuction.productId }}
+      } @else {
+        Select an auction to inspect its state and statistics.
+      }
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    @if (selectedAuction) {
+      <div class="detail-grid">
+        <div>
+          <span>Starting price</span>
+          <strong>{{ selectedAuction.startingPrice | number : '1.0-2' }}</strong>
+        </div>
+        <div>
+          <span>Current bid</span>
+          <strong>{{ (selectedAuction.currentHighestBid ?? selectedAuction.startingPrice) | number : '1.0-2' }}</strong>
+        </div>
+        <div>
+          <span>Highest bidder</span>
+          <strong>{{ selectedAuction.highestBidderId ?? '—' }}</strong>
+        </div>
+        <div>
+          <span>Status</span>
+          <strong>{{ selectedAuction.active ? 'Active' : 'Closed' }}</strong>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="controls-row">
+        <mat-form-field appearance="outline" floatLabel="always">
+          <mat-label>Strategy</mat-label>
+          <mat-select [value]="statsType" (selectionChange)="statsTypeChange.emit($event.value)">
+            @for (strategy of strategyOptions; track strategy.value) {
+              <mat-option [value]="strategy.value">{{ strategy.label }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="button" [disabled]="loadingAction" (click)="loadStats.emit(selectedAuction.id)">
+          Load stats
+        </button>
+      </div>
+
+      @if (selectedStats) {
+        <div class="stats-grid">
+          <div>
+            <span>Max bid</span>
+            <strong>{{ selectedStats.maxBid | number : '1.0-2' }}</strong>
+          </div>
+          <div>
+            <span>Min bid</span>
+            <strong>{{ selectedStats.minBid | number : '1.0-2' }}</strong>
+          </div>
+          <div>
+            <span>Avg bid</span>
+            <strong>{{ selectedStats.avgBid | number : '1.0-2' }}</strong>
+          </div>
+          <div>
+            <span>Current bid</span>
+            <strong>{{ selectedStats.currentHighestBid | number : '1.0-2' }}</strong>
+          </div>
+        </div>
+      } @else {
+        <p class="empty-state">Load stats to inspect bid distribution.</p>
+      }
+    } @else {
+      <p class="empty-state">No auction selected yet.</p>
+    }
+  </mat-card-content>
+</mat-card>

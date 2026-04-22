@@ -1,1 +1,70 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+html {
+	color-scheme: light;
+	@include mat.theme((
+		color: (
+			primary: mat.$rose-palette,
+			tertiary: mat.$red-palette,
+			theme-type: light,
+		),
+		typography: 'Roboto, "Helvetica Neue", sans-serif',
+		density: 0,
+	));
+	@include mat.strong-focus-indicators((
+		border-color: #E91E63,
+		border-radius: 6px,
+	));
+}
+
+:root {
+	--app-primary: #E91E63;
+	--app-accent: #F44336;
+	--app-bg: #FFF5F7;
+	--app-card-bg: #FFFFFF;
+	--app-text-primary: #1A1A1A;
+	--app-text-secondary: #757575;
+	--app-error: #B00020;
+	--app-success: #2E7D32;
+}
+
+body {
+	margin: 0;
+	min-height: 100%;
+	font-family: Roboto, 'Helvetica Neue', sans-serif;
+	font-size: 14px;
+	line-height: 1.45;
+	color: var(--app-text-primary);
+	background: var(--app-bg);
+}
+
+button,
+input,
+select,
+textarea {
+	font: inherit;
+	color: inherit;
+}
+
+.mat-mdc-card {
+	box-shadow: none !important;
+}
+
+.mat-mdc-button-base {
+	border-radius: 6px !important;
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+	background: var(--app-primary) !important;
+	color: #FFFFFF !important;
+}
+
+.mat-mdc-outlined-button:not(:disabled) {
+	border-color: var(--app-accent) !important;
+	color: var(--app-accent) !important;
+	background: transparent !important;
+}
+
+* {
+	box-sizing: border-box;
+}

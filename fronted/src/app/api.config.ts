@@ -1,0 +1,1 @@
+export const BIDDING_ENGINE_API_BASE_URL = 'https://distributed-bidding-engine-production.up.railway.app';

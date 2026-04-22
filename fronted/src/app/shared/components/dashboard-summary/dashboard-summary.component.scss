@@ -1,0 +1,101 @@
+:host {
+  display: block;
+}
+
+.summary-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 12px;
+  border-radius: 12px;
+  min-height: auto;
+  padding: 0 24px;
+  margin-bottom: 24px;
+  background: #E91E63;
+  color: #FFFFFF;
+}
+
+.summary-toolbar h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.summary-toolbar .mat-mdc-outlined-button {
+  border-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+  align-items: stretch;
+}
+
+.metric-card {
+  border-radius: 12px;
+  border: 1px solid #E5E7EB;
+  background: #FFFFFF;
+  min-height: auto;
+  height: 100%;
+}
+
+.metric-card :is(mat-card-title, mat-card-content) {
+  padding: 24px;
+}
+
+.metric-card mat-card-title {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: #757575;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.metric-card mat-card-content {
+  display: grid;
+  align-content: end;
+  padding-top: 0;
+}
+
+.metric-card strong {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #E91E63;
+}
+
+.summary-error {
+  border-radius: 12px;
+  border: 1px solid #E5E7EB;
+  background: #FFFFFF;
+  margin-bottom: 24px;
+}
+
+.summary-error mat-card-content {
+  padding: 24px;
+}
+
+.error-state {
+  color: #B00020;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .summary-toolbar {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .summary-toolbar .mat-mdc-outlined-button {
+    width: 100%;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}

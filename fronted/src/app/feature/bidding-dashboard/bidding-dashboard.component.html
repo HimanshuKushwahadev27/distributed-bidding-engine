@@ -1,0 +1,53 @@
+<section class="dashboard-shell">
+  <app-dashboard-summary
+    [auctionsCount]="auctions().length"
+    [activeAuctionCount]="activeAuctionCount()"
+    [highestCurrentBid]="highestCurrentBid()"
+    [selectedAuctionId]="selectedAuctionId()"
+    [loadingAuctions]="loadingAuctions()"
+    [loadingAction]="loadingAction()"
+    [errorMessage]="errorMessage()"
+    (refresh)="refreshAuctions(true)"
+    (reloadStats)="loadStats()"
+  ></app-dashboard-summary>
+
+  <div class="dashboard-grid">
+    <div class="dashboard-column dashboard-column--left">
+      <app-auction-list
+        [auctions]="auctions()"
+        [selectedAuctionId]="selectedAuctionId()"
+        [loadingAction]="loadingAction()"
+        (selectAuction)="selectAuction($event)"
+        (closeAuction)="closeAuction($event)"
+      ></app-auction-list>
+
+      <app-activity-feed [activity]="activity()"></app-activity-feed>
+    </div>
+
+    <div class="dashboard-column dashboard-column--right">
+      <app-auction-inspector
+        [selectedAuction]="selectedAuction()"
+        [selectedStats]="selectedStats()"
+        [statsType]="statsModel.type"
+        [strategyOptions]="strategyOptions"
+        [loadingAction]="loadingAction()"
+        (statsTypeChange)="setStatsType($event)"
+        (loadStats)="loadStats($event)"
+      ></app-auction-inspector>
+
+      <app-auction-actions
+        [createModel]="createAuctionModel"
+        [placeBidModel]="placeBidModel"
+        [simulateModel]="simulateModel"
+        [strategyOptions]="strategyOptions"
+        [selectedAuctionId]="selectedAuctionId()"
+        [loadingAction]="loadingAction()"
+        (createAuction)="createAuction($event)"
+        (placeBid)="placeBid($event)"
+        (simulateBids)="simulateBids($event)"
+      ></app-auction-actions>
+
+      <app-response-panel [lastResponse]="lastResponse()"></app-response-panel>
+    </div>
+  </div>
+</section>

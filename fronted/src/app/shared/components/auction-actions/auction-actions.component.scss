@@ -1,0 +1,80 @@
+:host {
+  display: block;
+}
+
+.panel-card {
+  border-radius: 12px;
+  border: 1px solid #E5E7EB;
+  background: #FFFFFF;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.panel-card mat-card-header {
+  display: block;
+  padding: 24px 24px 0;
+}
+
+.panel-card mat-card-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #880E4F;
+}
+
+.panel-card mat-card-subtitle {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: #9E9E9E;
+}
+
+.panel-card mat-card-content {
+  padding: 24px;
+}
+
+.actions-tabs {
+  display: block;
+}
+
+:host ::ng-deep .actions-tabs .mat-mdc-tab-header {
+  border-bottom: 1px solid #F3D8E2;
+  margin-bottom: 16px;
+}
+
+:host ::ng-deep .actions-tabs .mdc-tab-indicator__content--underline {
+  border-color: #E91E63;
+  border-top-width: 2px;
+}
+
+:host ::ng-deep .actions-tabs .mdc-tab__text-label {
+  color: #757575;
+}
+
+:host ::ng-deep .actions-tabs .mdc-tab--active .mdc-tab__text-label {
+  color: #880E4F;
+  font-weight: 600;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding-top: 0;
+}
+
+.form-grid mat-form-field {
+  width: 100%;
+}
+
+.submit-button {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+  .panel-card mat-card-header,
+  .panel-card mat-card-content {
+    padding: 16px;
+  }
+}

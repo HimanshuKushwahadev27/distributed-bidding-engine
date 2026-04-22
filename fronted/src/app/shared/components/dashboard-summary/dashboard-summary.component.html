@@ -1,0 +1,51 @@
+<mat-toolbar class="summary-toolbar" color="primary">
+  <div>
+    <h1>Distributed Bidding Engine Dashboard</h1>
+  </div>
+
+  <button mat-stroked-button color="primary" type="button" (click)="refresh.emit()" [disabled]="loadingAuctions || loadingAction">
+    {{ loadingAuctions ? 'Refreshing...' : 'Refresh auctions' }}
+  </button>
+
+  <button mat-stroked-button color="primary" type="button" (click)="reloadStats.emit()" [disabled]="loadingAction">
+    Reload stats
+  </button>
+</mat-toolbar>
+
+<section class="summary-grid" aria-label="Summary statistics">
+  <mat-card class="metric-card">
+    <mat-card-title>Total auctions</mat-card-title>
+    <mat-card-content>
+      <strong>{{ auctionsCount }}</strong>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="metric-card">
+    <mat-card-title>Active auctions</mat-card-title>
+    <mat-card-content>
+      <strong>{{ activeAuctionCount }}</strong>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="metric-card">
+    <mat-card-title>Highest bid</mat-card-title>
+    <mat-card-content>
+      <strong>{{ highestCurrentBid | number : '1.0-2' }}</strong>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="metric-card">
+    <mat-card-title>Selected auction ID</mat-card-title>
+    <mat-card-content>
+      <strong>{{ selectedAuctionId ?? '—' }}</strong>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+@if (errorMessage) {
+  <mat-card class="summary-error">
+    <mat-card-content class="error-state">
+      {{ errorMessage }}
+    </mat-card-content>
+  </mat-card>
+}

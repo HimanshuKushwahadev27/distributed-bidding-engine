@@ -1,0 +1,113 @@
+:host {
+  display: block;
+}
+
+.panel-card {
+  border-radius: 12px;
+  border: 1px solid #E5E7EB;
+  background: #FFFFFF;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.panel-card mat-card-header {
+  display: block;
+  padding: 24px 24px 0;
+}
+
+.panel-card mat-card-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #880E4F;
+}
+
+.panel-card mat-card-subtitle {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: #9E9E9E;
+}
+
+.panel-card mat-card-content {
+  padding: 24px;
+}
+
+.table-wrap {
+  overflow: auto;
+  padding-top: 4px;
+}
+
+.auction-table {
+  width: 100%;
+}
+
+.auction-table .mat-mdc-header-row {
+  background: #F8BBD0;
+}
+
+.auction-table .mat-mdc-header-cell {
+  color: #880E4F;
+  font-size: 12px;
+  font-weight: 600;
+  border-bottom: 0;
+}
+
+.auction-table .mat-mdc-row:nth-child(odd) {
+  background: #FFFFFF;
+}
+
+.auction-table .mat-mdc-row:nth-child(even) {
+  background: #FCE4EC;
+}
+
+.auction-table .mat-mdc-cell {
+  color: #1A1A1A;
+  border-bottom: 1px solid #F3D8E2;
+}
+
+.row-actions {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  gap: 8px;
+}
+
+.action-button {
+  color: #E91E63;
+}
+
+.action-button--close {
+  color: #F44336;
+}
+
+.action-icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.status-chip {
+  border-radius: 6px;
+  border: 1px solid #F3D8E2;
+}
+
+.status-chip--active {
+  background: #FDE7F0;
+  color: #AD1457;
+}
+
+.status-chip--closed {
+  background: #F9F9F9;
+  color: #616161;
+}
+
+.is-selected {
+  outline: 1px solid #E91E63;
+}
+
+@media (max-width: 768px) {
+  .panel-card mat-card-header,
+  .panel-card mat-card-content {
+    padding: 16px;
+  }
+}

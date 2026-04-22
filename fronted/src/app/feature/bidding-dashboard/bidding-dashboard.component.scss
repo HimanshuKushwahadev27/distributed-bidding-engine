@@ -1,0 +1,39 @@
+:host {
+  display: block;
+}
+
+.dashboard-shell {
+  display: grid;
+  gap: 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.dashboard-column {
+  display: grid;
+  gap: 0;
+  min-width: 0;
+}
+
+.dashboard-column > * {
+  width: 100%;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .dashboard-shell {
+    padding: 16px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}

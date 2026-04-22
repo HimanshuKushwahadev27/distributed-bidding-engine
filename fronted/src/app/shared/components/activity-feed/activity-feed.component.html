@@ -1,0 +1,20 @@
+<mat-card class="panel-card">
+  <mat-card-header>
+    <mat-card-title>Activity feed</mat-card-title>
+    <mat-card-subtitle>Most recent events from the dashboard</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="feed-scroll">
+      @if (activity.length) {
+        @for (item of activity; track item.timestamp + item.title) {
+          <p class="feed-entry" [class.feed-entry--success]="item.tone === 'success'" [class.feed-entry--error]="item.tone === 'error'">
+            [{{ item.timestamp }}] {{ item.title }} — {{ item.detail }}
+          </p>
+        }
+      } @else {
+        <p class="empty-state">Actions you trigger will appear here.</p>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>
