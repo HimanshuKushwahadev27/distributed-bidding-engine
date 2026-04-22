@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Large coin in center -->
+  <!-- Coin outer circle -->
+  <circle cx="32" cy="32" r="31" fill="none" stroke="#C9678E" stroke-width="3"/>
+  
+  <!-- Coin top highlight (3D effect) -->
+  <ellipse cx="32" cy="4" rx="29" ry="7" fill="none" stroke="#C9678E" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Coin fill (light interior) -->
+  <circle cx="32" cy="32" r="29" fill="#C9678E" opacity="0.08"/>
+  
+  <!-- Dollar sign in center -->
+  <text x="32" y="42" font-size="40" fill="#C9678E" text-anchor="middle" font-weight="bold">$</text>
+
+</svg>
