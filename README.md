@@ -271,7 +271,7 @@ npm start
 ##  Using the Bidding Simulator
 
 The frontend provides an intuitive interface to test bidding strategies:
-
+(though only 3 stratergies for now)
 ### 1. Create an Auction
 - Select a product from the catalog
 - Set starting price and duration
