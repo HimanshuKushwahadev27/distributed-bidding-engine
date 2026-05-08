@@ -476,6 +476,3 @@ For issues, questions, or feature requests:
 ---
 
 
----
-
-**Built with Luv for efficient distributed bidding**
