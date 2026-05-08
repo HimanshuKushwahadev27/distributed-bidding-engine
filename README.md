@@ -372,7 +372,7 @@ Results Display:
 3. **Use Naive** only for testing baselines and low-concurrency scenarios
 4. Enable Redis caching for frequent product/user lookups
 5. Use database connection pooling (configured in Neon)
-
+6. Can also use kafka based strategy method
 ---
 
 ##  Security Features
